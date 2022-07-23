@@ -14,21 +14,21 @@
         <section class="btn-container">
             <button id="btnToggleForm" type="button" class="btn-primary">Add entry</button>
         </section>
-        <form class="d-none">
+        <form id="entry-form" class="d-none" method="POST" action="http://localhost:8080/noted/entries">
             <section class="form-group">
-                <input type="text" class="form-control" id="form-title" placeholder="Title">
+                <input type="text" class="form-control" id="formTitle" placeholder="Title">
             </section>
             <section class="form-group">
-                <input type="text" class="form-control" id="form-artist" placeholder="Artist">
+                <input type="text" class="form-control" id="formArtist" placeholder="Artist">
             </section>
             <section class="form-group">
-                <input type="text" class="form-control" id="form-album" placeholder="Album">
+                <input type="text" class="form-control" id="formAlbum" placeholder="Album">
             </section>
             <section class="form-group">
-                <input type="text" class="form-control" id="form-description" placeholder="Description">
+                <input type="text" class="form-control" id="formDescription" placeholder="Description">
             </section>
             <section class="form-group">
-                <textarea type="textarea" rows="1" cols="50" wrap="physical" class="form-control" id="form-body" placeholder="Type your entry here"></textarea>
+                <textarea type="textarea" rows="1" cols="50" wrap="physical" class="form-control" id="formBody" placeholder="Type your entry here"></textarea>
             </section>
             <section class="btn-container">
                 <button id="btnSave" type="button" class="btn-primary">Save</button>
