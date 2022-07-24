@@ -29,6 +29,12 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Student\jw-personal-projects\noted\server\src\main\resources" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="NotedApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
