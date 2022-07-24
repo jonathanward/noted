@@ -2,10 +2,12 @@ package com.noted.controller;
 
 import com.noted.dao.NotedCardDao;
 import com.noted.model.NotedCard;
-import org.springframework.stereotype.Controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import javax.validation.Valid;
+import java.util.List;
 
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 public class NotedController {
 
@@ -15,8 +17,17 @@ public class NotedController {
         this.notedCardDao = notedCardDao;
     }
 
+    @RequestMapping(path = "noted/entries")
+    public List<NotedCard> listAllCards() {
+        return notedCardDao.list();
+    }
+
     @ResponseStatus(HttpStatus.CREATED)
-    @RequestMapping(path = "http://localhost:8080/noted/entries", method = RequestMethod.POST)
-    public NotedCard createCard(@RequestBody NotedCard notedCard) { return notedCardDao.createNotedCard(notedCard); }
+    @RequestMapping(path = "noted/entries", method = RequestMethod.POST)
+    public NotedCard createCard(@Valid @RequestBody NotedCard notedCard) { return notedCardDao.createNotedCard(notedCard); }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @RequestMapping(path = "noted/entries/{id}", method = RequestMethod.POST)
+    public void createCard(@PathVariable Long id) { notedCardDao.deleteNotedCard(id); }
 
 }

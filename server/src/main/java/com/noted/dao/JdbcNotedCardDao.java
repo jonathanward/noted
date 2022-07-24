@@ -30,9 +30,9 @@ public class JdbcNotedCardDao implements NotedCardDao {
     }
 
     @Override
-    public NotedCard getNotedCardById(long id) {
+    public NotedCard getNotedCardById(Long id) {
         NotedCard card = null;
-        String sql = "SELECT title, artist, album, description, body FROM noted WHERE id = ?;";
+        String sql = "SELECT id, title, artist, album, description, body FROM noted WHERE id = ?;";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
         if (results.next()) {
             card = mapRowToCard(results);
@@ -59,7 +59,7 @@ public class JdbcNotedCardDao implements NotedCardDao {
     }
 
     @Override
-    public void deleteNotedCard(long id) {
+    public void deleteNotedCard(Long id) {
         String sql = "DELETE from noted WHERE id = ?;";
     }
 

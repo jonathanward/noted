@@ -1,17 +1,23 @@
 package com.noted.model;
+import javax.validation.constraints.NotEmpty;
 
 public class NotedCard {
 
-    private long id;
+    private Long id;
+    @NotEmpty
     private String title;
+    @NotEmpty
     private String artist;
+    @NotEmpty
     private String album;
+    @NotEmpty
     private String description;
+    @NotEmpty
     private String body;
 
     public NotedCard() {}
 
-    public NotedCard(long id, String title, String artist, String album, String description, String body) {
+    public NotedCard(Long id, String title, String artist, String album, String description, String body) {
         this.id = id;
         this.title = title;
         this.artist = artist;
@@ -20,11 +26,11 @@ public class NotedCard {
         this.body = body;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
