@@ -14,35 +14,35 @@
         <section class="btn-container">
             <button id="btnToggleForm" type="button" class="btn-primary">Add entry</button>
         </section>
-        <form id="entry-form" class="d-none" method="POST" action="http://localhost:8080/noted/entries">
-            <section class="form-group">
-                <input type="text" class="form-control" id="formTitle" placeholder="Title">
+        <section id="entry-input" class="d-none">
+            <section class="entry-group">
+                <input type="text" class="form-control" id="title" placeholder="Title">
             </section>
-            <section class="form-group">
-                <input type="text" class="form-control" id="formArtist" placeholder="Artist">
+            <section class="entry-group">
+                <input type="text" class="form-control" id="artist" placeholder="Artist">
             </section>
-            <section class="form-group">
-                <input type="text" class="form-control" id="formAlbum" placeholder="Album">
+            <section class="entry-group">
+                <input type="text" class="form-control" id="album" placeholder="Album">
             </section>
-            <section class="form-group">
-                <input type="text" class="form-control" id="formDescription" placeholder="Description">
+            <section class="entry-group">
+                <input type="text" class="form-control" id="description" placeholder="Description">
             </section>
-            <section class="form-group">
-                <textarea type="textarea" rows="1" cols="50" wrap="physical" class="form-control" id="formBody" placeholder="Type your entry here"></textarea>
+            <section class="entry-group">
+                <textarea type="textarea" rows="1" cols="50" wrap="physical" class="form-control" id="body" placeholder="Type your entry here"></textarea>
             </section>
             <section class="btn-container">
                 <button id="btnSave" type="button" class="btn-primary">Save</button>
             </section>
-        </form>
+        </section>
         <template id="noted-template">
             <section class="noted-section">
-                <h2 id="title"></h2>
-                <h3><span id="artist"></span>, <span id="album"></span></h3>
-                <h4 id="description"></h4>
-                <p id="noted-body"></p>
+                <h2 id="template-title"></h2>
+                <h3><span id="template-artist"></span>, <span id="template-album"></span></h3>
+                <h4 id="template-description"></h4>
+                <p id="template-body"></p>
                 <section class="btn-container">
-                    <button id="btnUpdate" type="button" class="btn-active">Edit</button>
-                    <button id="btnDelete" type="button" class="btn-active">Delete</button>
+                    <button type="button" class="btnUpdate">Edit</button>
+                    <button type="button" class="btnDelete">Delete</button>
                 </section>
             </section>
         </template>
