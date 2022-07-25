@@ -7,6 +7,7 @@ CREATE TABLE noted (
   title varchar(500) NOT NULL,
   artist varchar(1000) NOT NULL,
   album varchar(1000) NOT NULL,
+  url varchar(500) NOT NULL,
   description varchar(2000) NOT NULL,
   body varchar(10000) NOT NULL
 );
