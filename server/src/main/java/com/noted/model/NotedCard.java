@@ -11,17 +11,20 @@ public class NotedCard {
     @NotEmpty
     private String album;
     @NotEmpty
+    private String url;
+    @NotEmpty
     private String description;
     @NotEmpty
     private String body;
 
     public NotedCard() {}
 
-    public NotedCard(Long id, String title, String artist, String album, String description, String body) {
+    public NotedCard(Long id, String title, String artist, String album, String url, String description, String body) {
         this.id = id;
         this.title = title;
         this.artist = artist;
         this.album = album;
+        this.url = url;
         this.description = description;
         this.body = body;
     }
@@ -56,6 +59,14 @@ public class NotedCard {
 
     public void setAlbum(String album) {
         this.album = album;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public String getDescription() {

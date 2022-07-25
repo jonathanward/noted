@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
+@RequestMapping("/")
 public class NotedController {
 
     private final NotedCardDao notedCardDao;
@@ -27,7 +27,7 @@ public class NotedController {
     public NotedCard createCard(@Valid @RequestBody NotedCard notedCard) { return notedCardDao.createNotedCard(notedCard); }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @RequestMapping(path = "noted/entries/{id}", method = RequestMethod.POST)
-    public void createCard(@PathVariable Long id) { notedCardDao.deleteNotedCard(id); }
+    @RequestMapping(path = "noted/entries/{id}", method = RequestMethod.DELETE)
+    public void deleteCard(@PathVariable Long id) { notedCardDao.deleteNotedCard(id); }
 
 }

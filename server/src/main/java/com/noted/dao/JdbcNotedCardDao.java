@@ -21,7 +21,7 @@ public class JdbcNotedCardDao implements NotedCardDao {
     @Override
     public List<NotedCard> list() {
         List<NotedCard> cards = new ArrayList<>();
-        String sql = "SELECT id, title, artist, album, description, body FROM noted;";
+        String sql = "SELECT id, title, artist, album, url, description, body FROM noted;";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
         while (results.next()) {
             cards.add(mapRowToCard(results));
@@ -32,7 +32,7 @@ public class JdbcNotedCardDao implements NotedCardDao {
     @Override
     public NotedCard getNotedCardById(Long id) {
         NotedCard card = null;
-        String sql = "SELECT id, title, artist, album, description, body FROM noted WHERE id = ?;";
+        String sql = "SELECT id, title, artist, album, url, description, body FROM noted WHERE id = ?;";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, id);
         if (results.next()) {
             card = mapRowToCard(results);
@@ -42,25 +42,29 @@ public class JdbcNotedCardDao implements NotedCardDao {
 
     @Override
     public NotedCard createNotedCard(NotedCard cardToSave) {
-        String sql = "INSERT INTO noted (title, artist, album, description, body) " +
-                "VALUES(?, ?, ?, ?, ?) " +
+        String sql = "INSERT INTO noted (title, artist, album, url, description, body) " +
+                "VALUES(?, ?, ?, ?, ?, ?) " +
                 "RETURNING id;";
         Long newCardId = jdbcTemplate.queryForObject(sql, Long.class, cardToSave.getTitle(),
-                cardToSave.getArtist(), cardToSave.getAlbum(), cardToSave.getDescription(), cardToSave.getBody());
+                cardToSave.getArtist(), cardToSave.getAlbum(), cardToSave.getUrl() ,cardToSave.getDescription(),
+                cardToSave.getBody());
         return getNotedCardById(newCardId);
     }
 
     @Override
     public NotedCard updateNotedCard(NotedCard updatedCard) {
         String sql = "UPDATE noted " +
-                "SET title = ?, artist = ?, album = ?, description = ?, body = ? " +
+                "SET title = ?, artist = ?, album = ?, url = ?, description = ?, body = ? " +
                 "WHERE id = ?;";
+        jdbcTemplate.update(sql, updatedCard.getTitle(), updatedCard.getArtist(), updatedCard.getAlbum(),
+                updatedCard.getUrl(), updatedCard.getDescription(), updatedCard.getBody(), updatedCard.getId());
         return getNotedCardById(updatedCard.getId());
     }
 
     @Override
     public void deleteNotedCard(Long id) {
         String sql = "DELETE from noted WHERE id = ?;";
+        jdbcTemplate.update(sql, id);
     }
 
     private NotedCard mapRowToCard(SqlRowSet row) {
@@ -69,6 +73,7 @@ public class JdbcNotedCardDao implements NotedCardDao {
         card.setTitle(row.getString("title"));
         card.setArtist(row.getString("artist"));
         card.setAlbum(row.getString("album"));
+        card.setUrl(row.getString(("url")));
         card.setDescription(row.getString("description"));
         card.setBody(row.getString("body"));
         return card;
