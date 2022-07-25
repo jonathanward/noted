@@ -52,15 +52,25 @@
                     <h2></h2>
                     <h4></h4>
                     <p></p>
+                    <input class="d-none entry-edit" type="text"/>
+                    <input class="d-none entry-edit" type="text"/>
+                    <input class="d-none entry-edit" type="text"/>
+                    <input class="d-none entry-edit" type="text"/>
+                    <textarea type="textarea" rows="1" cols="50" wrap="physical" class="d-none entry-edit description-input"></textarea>
+                    <textarea type="textarea" rows="1" cols="50" wrap="physical" class="d-none entry-edit"></textarea>
                     <section class="btn-container">
-                        <button type="button" class="btnUpdate" onclick="updateCard(event, id)">Edit</button>
-                        <button type="button" class="btnDelete" onclick="deleteCard(event, id)">Delete</button>
+                        <button type="button" class="btnUpdate" onclick="editCard(event)">Edit</button>
+                        <button type="button" class="btnDelete" onclick="deleteCard(id)">Delete</button>
+                        <button type="button" class="btnCancel d-none" onclick="toggleEdit(event)">Cancel</button>
+                        <button type="button" class="btnSave d-none" onclick="saveEdit(event, id)">Save</button>
                     </section>
                 </section>
                 <section class="right-spacer"></section>
             </section>
         </template>
     </section>
-    <footer></footer>
+    <footer>
+        <p>© 2022 Noted</p>
+    </footer>
 </body>
 </html>
