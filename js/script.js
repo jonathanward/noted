@@ -4,14 +4,18 @@ const addEntryText = 'Add entry';
 const hideNewEntryText = 'Clear new entry';
 let calls = 0;
 
+const form = document.getElementById('entry-input');
+const title = document.getElementById('title');
+const artist = document.getElementById('artist');
+const album = document.getElementById('album');
+const url = document.getElementById('url');
+const description = document.getElementById('description');
+const body = document.getElementById('body');
+
 document.addEventListener('DOMContentLoaded', () => {
-    // TODO: Add event listener to load all entries
     document.getElementById('btnToggleForm').addEventListener('click', toggleForm);
     document.getElementById('btnSave').addEventListener('click', saveCard);
     loadAll();
-    document.querySelectorAll('.btnDelete').forEach(element => {
-        element.addEventListener('click', event => { deleteCard(event, id) });
-    });
 })
 
 function toggleForm() {
@@ -22,20 +26,17 @@ function toggleForm() {
         btnToggleForm.innerText = hideNewEntryText;
     } else if (btnToggleForm.innerText === hideNewEntryText) {
         btnToggleForm.innerText = addEntryText;
+        clearForm();
     }
+    
 }
 
 function saveCard() {
-    const form = document.getElementById('entry-input');
-    const title = document.getElementById('title');
-    const artist = document.getElementById('artist');
-    const album = document.getElementById('album');
-    const description = document.getElementById('description');
-    const body = document.getElementById('body');
     const notedCard = {};
     notedCard['title'] = title.value;
     notedCard['artist'] = artist.value;
     notedCard['album'] = album.value;
+    notedCard['url'] = url.value;
     notedCard['description'] = description.value;
     notedCard['body'] = body.value;
     let areFieldsComplete = true;
@@ -58,11 +59,7 @@ function saveCard() {
                 if (response.ok) {
                     calls++;
                     loadAll();
-                    title.value = '';
-                    artist.value = '';
-                    album.value = '';
-                    description.value = '';
-                    body.value = '';
+                    clearForm();
                     form.classList.add('d-none');
                     btnToggleForm.innerText = addEntryText;
                 }
@@ -76,16 +73,32 @@ function saveCard() {
     }
 }
 
+function clearForm() {
+    title.value = '';
+    artist.value = '';
+    album.value = '';
+    url.value = '';
+    description.value = '';
+    body.value = '';
+}
+
+function updateCard(event, id) {
+    console.log('Functionality coming soon.');
+}
+
 function deleteCard(event, id) {
     fetch(API_BASE + '/' + id, {
         method: 'DELETE'
     })
         .then((response) => {
-            return response.text();
+            if (response.status === 204) {
+                return;
+            } else {
+              throw 'Failed!';  
+            }
         })
-        .then((data) => {
-            clearCards(data);
-            displayCards(data);
+        .then(() => {
+            loadAll();
         })
         .catch((err) => {
             console.error(err);
@@ -99,10 +112,12 @@ function loadAll() {
             return response.json();
         })
         .then((data) => {
-            if (calls > 0) {
-                clearCards(data);
-            }
+            clearCards();
             displayCards(data);
+        })
+        .catch((err) => {
+            console.error(err);
+            alert('Failed to load entries. Please try again later.');
         });   
 }
 
@@ -120,16 +135,19 @@ function displayCards(cards) {
 function displayCard(card) {
     const main = document.getElementById('main');
     const tmpl = document.getElementById('noted-template').content.cloneNode(true);
-    tmpl.getElementById('template-title').innerText = card.title;
-    tmpl.getElementById('template-artist').innerText = card.artist;
-    tmpl.getElementById('template-album').innerText = card.album;
-    tmpl.getElementById('template-description').innerText = card.description;
-    tmpl.getElementById('template-body').innerText = card.body;
+    tmpl.querySelector('h2').innerText = card.title;
+    tmpl.querySelector('h3').firstChild.innerText = card.artist;
+    tmpl.querySelector('h3').lastChild.innerText = card.album;
+    tmpl.querySelector('img').setAttribute("src", card.url);
+    tmpl.querySelector('img').setAttribute("class", "entry-img");
+    tmpl.querySelector('h4').innerText = card.description;
+    tmpl.querySelector('p').innerText = card.body;
+    tmpl.querySelector('.btnUpdate').setAttribute("id", card.id);
+    tmpl.querySelector('.btnDelete').setAttribute("id", card.id);
     main.appendChild(tmpl);
 }
 
-function clearCards(data) {
-    const main = document.getElementById('main');
+function clearCards() {
     document.querySelectorAll('.noted-section').forEach(element => {
         element.remove();
     });
