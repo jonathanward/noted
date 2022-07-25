@@ -26,6 +26,10 @@ public class NotedController {
     @RequestMapping(path = "noted/entries", method = RequestMethod.POST)
     public NotedCard createCard(@Valid @RequestBody NotedCard notedCard) { return notedCardDao.createNotedCard(notedCard); }
 
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    @RequestMapping(path = "noted/entries", method = RequestMethod.PUT)
+    public NotedCard updateCard(@Valid @RequestBody NotedCard notedCard) { return notedCardDao.updateNotedCard(notedCard); }
+
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @RequestMapping(path = "noted/entries/{id}", method = RequestMethod.DELETE)
     public void deleteCard(@PathVariable Long id) { notedCardDao.deleteNotedCard(id); }
