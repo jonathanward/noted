@@ -20,10 +20,12 @@ header h1 {
 button {
     padding: 8px;
     font-size: 14px;
+    font-weight: 700;
     font-family: 'Libre Franklin', sans-serif;
     background-color: black;
     color: #fffffe;
     border: none;
+    cursor: pointer;
 }
 
 button:hover {
@@ -82,6 +84,10 @@ textarea {
     min-height: 250px;
 }
 
+.description-input {
+    min-height: 100px;
+}
+
 .d-none {
     display: none;
 }
@@ -115,8 +121,29 @@ textarea {
     line-height: 1.4em;
 }
 
+.entry-edit {
+    color: #00000f;
+    border: 1px solid #8a8a8a;
+}
+
+#btnSave {
+    width: 70%;
+    color: #fffffe;
+    background-color: #505050;
+}
+
+#btnSave:hover {
+    background-color: black;
+}
+
 footer {
     padding: 40px;
+}
+
+footer p {
+    text-align: center;
+    font-family: 'Libre Franklin', sans-serif;
+    font-weight: 900;
 }
 
 @media screen and (max-width: 1100px) {
@@ -133,14 +160,18 @@ footer {
 
 @media screen and (max-width: 540px) {
     .entry-img {
-        width: 100%;
-        object-fit: cover;
+        max-width: 100%;
+        max-height: 100%;
         margin-right: 0px;
     }
 
     input, textarea {
         margin: 0;
-        width: 100%;
+        width: 90%;
+    }
+
+    #btnSave {
+        width: 90%;
     }
     
     .noted-section, .container-top {
