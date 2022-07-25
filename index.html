@@ -5,47 +5,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-compatible" content="ie=edge" />
     <title>Noted</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Libre+Franklin:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css" />
     <script src="js/script.js" defer></script>
 </head>
 <body>
     <section id="main">
-        <h1>Noted</h1>
-        <section class="btn-container">
+        <header>
+            <h1>Noted</h1>
+        </header>
+        <section class="container-top">
             <button id="btnToggleForm" type="button" class="btn-primary">Add entry</button>
-        </section>
-        <section id="entry-input" class="d-none">
-            <section class="entry-group">
-                <input type="text" class="form-control" id="title" placeholder="Title">
-            </section>
-            <section class="entry-group">
-                <input type="text" class="form-control" id="artist" placeholder="Artist">
-            </section>
-            <section class="entry-group">
-                <input type="text" class="form-control" id="album" placeholder="Album">
-            </section>
-            <section class="entry-group">
-                <input type="text" class="form-control" id="description" placeholder="Description">
-            </section>
-            <section class="entry-group">
-                <textarea type="textarea" rows="1" cols="50" wrap="physical" class="form-control" id="body" placeholder="Type your entry here"></textarea>
-            </section>
-            <section class="btn-container">
-                <button id="btnSave" type="button" class="btn-primary">Save</button>
+            <section id="entry-input" class="d-none">
+                <section class="entry-group">
+                    <input type="text" class="form-control" id="title" placeholder="Title">
+                </section>
+                <section class="entry-group">
+                    <input type="text" class="form-control" id="artist" placeholder="Artist">
+                </section>
+                <section class="entry-group">
+                    <input type="text" class="form-control" id="album" placeholder="Album">
+                </section>
+                <section class="entry-group">
+                    <input type="text" class="form-control" id="url" placeholder="Image URL">
+                </section>
+                <section class="entry-group">
+                    <textarea type="textarea" rows="1" cols="50" wrap="physical" class="form-control" id="description" placeholder="Description"></textarea>
+                </section>
+                <section class="entry-group">
+                    <textarea type="textarea" rows="1" cols="50" wrap="physical" class="form-control" id="body" placeholder="Type your entry here"></textarea>
+                </section>
+                <section class="btn-container">
+                    <button id="btnSave" type="button" class="btn-primary">Save</button>
+                </section>
             </section>
         </section>
         <template id="noted-template">
             <section class="noted-section">
-                <h2 id="template-title"></h2>
-                <h3><span id="template-artist"></span>, <span id="template-album"></span></h3>
-                <h4 id="template-description"></h4>
-                <p id="template-body"></p>
-                <section class="btn-container">
-                    <button type="button" class="btnUpdate">Edit</button>
-                    <button type="button" class="btnDelete">Delete</button>
+                <section class="left-col">
+                    <img />
                 </section>
+                <section class="right-col">
+                    <h3><span></span>: <span></span></h3>
+                    <h2></h2>
+                    <h4></h4>
+                    <p></p>
+                    <section class="btn-container">
+                        <button type="button" class="btnUpdate" onclick="updateCard(event, id)">Edit</button>
+                        <button type="button" class="btnDelete" onclick="deleteCard(event, id)">Delete</button>
+                    </section>
+                </section>
+                <section class="right-spacer"></section>
             </section>
         </template>
     </section>
+    <footer></footer>
 </body>
 </html>
