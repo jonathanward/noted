@@ -2,7 +2,7 @@ const API_BASE = 'http://localhost:8080/noted/entries';
 let notedData = [];
 const addEntryText = 'Add entry';
 const hideNewEntryText = 'Clear new entry';
-let calls = 0;
+
 
 const form = document.getElementById('entry-input');
 const title = document.getElementById('title');
@@ -27,8 +27,7 @@ function toggleForm() {
     } else if (btnToggleForm.innerText === hideNewEntryText) {
         btnToggleForm.innerText = addEntryText;
         clearForm();
-    }
-    
+    } 
 }
 
 function saveCard() {
@@ -57,7 +56,6 @@ function saveCard() {
         })
             .then((response) => {
                 if (response.ok) {
-                    calls++;
                     loadAll();
                     clearForm();
                     form.classList.add('d-none');
@@ -82,11 +80,72 @@ function clearForm() {
     body.value = '';
 }
 
-function updateCard(event, id) {
-    console.log('Functionality coming soon.');
+function editCard(event, id) {
+    const section = event.currentTarget.parentElement.parentElement.parentElement;
+    const inputs = section.querySelectorAll('input');
+    inputs[0].value = section.querySelector('h2').innerText;
+    inputs[1].value = section.querySelector('h3').firstChild.innerText;
+    inputs[2].value = section.querySelector('h3').lastChild.innerText;
+    inputs[3].value = section.querySelector('img').src;
+    const textAreas = section.querySelectorAll('textarea');
+    textAreas[0].value = section.querySelector('h4').innerText;
+    textAreas[1].value = section.querySelector('p').innerText;
+    toggleEdit(event);
 }
 
-function deleteCard(event, id) {
+function toggleEdit(event) {
+    const section = event.currentTarget.parentElement.parentElement.parentElement;
+    const inputs = section.querySelectorAll('input');
+    inputs[0].classList.toggle('d-none');
+    inputs[1].classList.toggle('d-none');
+    inputs[2].classList.toggle('d-none');
+    inputs[3].classList.toggle('d-none');
+    const textAreas = section.querySelectorAll('textarea');
+    textAreas[0].classList.toggle('d-none');
+    textAreas[1].classList.toggle('d-none');
+    section.querySelector('h3').classList.toggle('d-none');
+    section.querySelector('h2').classList.toggle('d-none');
+    section.querySelector('h4').classList.toggle('d-none');
+    section.querySelector('p').classList.toggle('d-none');
+    section.querySelector('.btnUpdate').classList.toggle('d-none');
+    section.querySelector('.btnDelete').classList.toggle('d-none');
+    section.querySelector('.btnCancel').classList.toggle('d-none');
+    section.querySelector('.btnSave').classList.toggle('d-none');
+}
+
+function saveEdit(event, id) {
+    const notedCard = {};
+    const section = event.currentTarget.parentElement.parentElement.parentElement;
+    const inputs = section.querySelectorAll('input');
+    notedCard['title'] = inputs[0].value;
+    notedCard['artist'] = inputs[1].value;
+    notedCard['album'] = inputs[2].value;
+    notedCard['url'] = inputs[3].value;
+    const textAreas = section.querySelectorAll('textarea');
+    notedCard['description'] = textAreas[0].value;
+    notedCard['body'] = textAreas[1].value;
+    notedCard['id'] = id;
+    fetch(API_BASE, {
+        method: 'PUT',
+        cache: 'no-cache',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(notedCard)
+    })
+        .then((response) => {
+            console.log(notedCard);
+            if (response.ok) {
+                loadAll();
+            }
+        })
+        .catch((err) => {
+            console.error(err);
+            alert('Could not update entry.');
+        });
+}
+
+function deleteCard(id) {
     fetch(API_BASE + '/' + id, {
         method: 'DELETE'
     })
@@ -144,6 +203,7 @@ function displayCard(card) {
     tmpl.querySelector('p').innerText = card.body;
     tmpl.querySelector('.btnUpdate').setAttribute("id", card.id);
     tmpl.querySelector('.btnDelete').setAttribute("id", card.id);
+    tmpl.querySelector('.btnSave').setAttribute("id", card.id);
     main.appendChild(tmpl);
 }
 
