@@ -1,27 +1,165 @@
 body {
-    padding: 0 10px;
+    margin: 0px;
+    padding: 0px;
+    background-color: #efefef;
+}
+
+header {
+    background-color: black;
+    color: white;
+    padding: 10px;
+}
+
+header h1 {
+    text-align: center;
+    font-family: 'Amiri', serif;
+    font-size: 40px;
+    font-weight: 700;
 }
 
 button {
-    padding: 3px;
+    padding: 8px;
     font-size: 14px;
+    font-family: 'Libre Franklin', sans-serif;
+    background-color: black;
+    color: #fffffe;
+    border: none;
+}
+
+button:hover {
+    background-color: rgb(4, 90, 250);
+}
+
+.btnDelete:hover {
+    background-color: rgba(233, 38, 54, 0.959);
 }
 
 #btnToggleForm {
     margin-bottom: 15px;
 }
 
+.noted-section, .container-top {
+    width: 90%;
+    margin: 0 auto;
+    padding: 30px 40px;
+}
+
+.container-top {
+    text-align: center;
+}
+
+.noted-section h2, .noted-section h4 {
+    font-family: 'Amiri', serif;
+}
+
+.noted-section h2 {
+    margin: 0;
+    font-size: 32px;
+    line-height: 28px;
+}
+
+.noted-section h3 {
+    color: #8a8a8a;
+}
+
+.noted-section h3, .noted-section h4, .noted-section p, input, textarea {
+    font-family: 'Libre Franklin', sans-serif;
+}
+
 input, textarea {
-    margin-bottom: 5px;
-    width: 400px;
-    font-family: sans-serif;
+    margin: 0 0 5px 0;
+    width: 70%;
     font-size: 14px;
+    border: none;
+    padding: 10px;
+}
+
+#description {
+    min-height: 60px;
 }
 
 textarea {
-    min-height: 150px;
+    min-height: 250px;
 }
 
 .d-none {
     display: none;
+}
+
+.entry-img {
+    max-width: 300px;
+    max-height: 300px;
+    object-fit: cover;
+    margin-right: 70px;
+}
+
+.noted-section {
+    background-color: #fffffe;
+    display: flex; 
+}
+
+.left-col {
+    flex-grow: 1;
+}
+
+.right-col {
+    flex-grow: 2;
+}
+
+.right-spacer {
+    padding: 15%;
+    flex-grow: 1;
+}
+
+.right-col p {
+    line-height: 1.4em;
+}
+
+footer {
+    padding: 40px;
+}
+
+@media screen and (max-width: 1100px) {
+    .right-spacer {
+        padding: 5%;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .noted-section {
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 540px) {
+    .entry-img {
+        width: 100%;
+        object-fit: cover;
+        margin-right: 0px;
+    }
+
+    input, textarea {
+        margin: 0;
+        width: 100%;
+    }
+    
+    .noted-section, .container-top {
+        width: 90%;
+        margin: 0 auto;
+        padding: 3%;
+    }
+
+    header {
+        padding: 2%;
+    }
+}
+
+@media screen and (max-width: 230px) {
+    header h1, html, .noted-section h2, button {
+        font-size: 1vh;
+    }
+
+    .noted-section h2 {
+        line-height: 1vh;
+    }
 }
